@@ -9,8 +9,10 @@ import HistoryIcon from "@mui/icons-material/History";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import SportsCricketIcon from "@mui/icons-material/SportsCricket";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const DrawerYtb = ({ open, setOpen }) => {
+  const navigate = useNavigate();
   const handleClose = () => {
     setOpen(false);
   };
@@ -30,7 +32,7 @@ const DrawerYtb = ({ open, setOpen }) => {
           onClick={handleClose}
         >
           <YouTubeIcon fontSize="large" sx={{ color: "red" }} />
-          <Typography variant="h5" sx={{ color: "black" }}>
+          <Typography variant="h5" sx={{ color: "black" }} onClick={()=> navigate("/")}>
             YouTube
             <sup style={{ fontSize: "10px" }}>IN</sup>
           </Typography>
@@ -54,7 +56,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <HomeIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">Home</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>Home</Typography>
       </Stack>
 
       <Stack
@@ -74,7 +76,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <SportsCricketIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">Cricket</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>Cricket</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -93,7 +95,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <TrendingUpIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">Trending</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>Trending</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -112,7 +114,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <HistoryIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">History</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>History</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -131,7 +133,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <SlowMotionVideoIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">Shorts</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>Shorts</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -150,7 +152,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <VideoLibraryIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">Library</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>Library</Typography>
       </Stack>
       <Stack
         direction="row"
@@ -169,7 +171,7 @@ const DrawerYtb = ({ open, setOpen }) => {
       >
         <SubscriptionsIcon sx={{ marginLeft: "3px", marginRight: "20px" }} />
         {/* {homeLink.icon} */}
-        <Typography variant="body2">Subscription</Typography>
+        <Typography variant="body2" onClick={()=> navigate("/")}>Subscription</Typography>
       </Stack>
 
       <Divider />

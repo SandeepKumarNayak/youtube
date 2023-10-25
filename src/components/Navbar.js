@@ -17,21 +17,55 @@ import SearchIcon from "@mui/icons-material/Search";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
-import React, { useState } from "react";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+
+import React, { useEffect, useState } from "react";
 import DrawerYtb from "./DrawerYtb";
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 function Navbar() {
+  const startListening =()=> SpeechRecognition.startListening({language:'en-IN' })
+  const { transcript, browserSupportsSpeechRecognition} = useSpeechRecognition();
+   
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [focused, setFocused] = useState(false);
+  const onFocus = () => setFocused(true);
+  const onBlur = () => setFocused(false);
+
+  useEffect(()=>{
+    setSearchValue(transcript)
+  },[transcript])
+  const searchResult = () => {
+    navigate(`/search/${searchValue}}`);
+    setSearchValue("");
+  };
+  if (!browserSupportsSpeechRecognition) {
+    return null
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: "white" }}>
+      <AppBar position="fixed" sx={{ background: "white" }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           {/* left of navbar start */}
           <Stack direction="row">
-            <IconButton size="medium" edge="start" sx={{ minWidth: "55px" }} onClick={()=> setOpen(!open)}>
+            <IconButton
+              size="medium"
+              edge="start"
+              sx={{ minWidth: "55px" }}
+              onClick={() => setOpen(!open)}
+            >
               <MenuIcon sx={{ color: "black" }} />
             </IconButton>
-            <IconButton sx={{ "&:hover": { backgroundColor: "white" } }}>
+            <IconButton
+              sx={{ "&:hover": { backgroundColor: "white" } }}
+              onClick={() => navigate("/")}
+            >
               <YouTubeIcon fontSize="large" sx={{ color: "red" }} />
               <Typography variant="h5" sx={{ color: "black" }}>
                 YouTube
@@ -45,24 +79,45 @@ function Navbar() {
           <Stack direction="row" spacing={1}>
             <Box sx={{ color: "white" }}>
               <TextField
-                sx={{ width: "400px" }}
-                
+                sx={{ width: focused ? "450px" : "400px" }}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    searchResult();
+                  }
+                }}
                 placeholder="Search"
+                onFocus={onFocus}
+                onBlur={onBlur}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
+                    <InputAdornment
+                      position="start"
+                      sx={{ display: focused ? "flex" : "none" }}
+                    >
                       <SearchIcon fontSize="medium" />
                     </InputAdornment>
                   ),
-                  style:{
-                    borderRadius:'40px',
-                    height:'40px'
-                  }
+                  endAdornment: (
+                    <InputAdornment
+                      position="end"
+                      sx={{ cursor: "pointer" }}
+                      onClick={searchResult}
+                    >
+                      <SearchIcon fontSize="medium" />
+                    </InputAdornment>
+                  ),
+                  style: {
+                    borderRadius: "40px",
+                    height: "40px",
+                  },
                 }}
               />
+              {/* <Button onClick={searchResult}>Search</Button> */}
             </Box>
-            <IconButton sx={{ minWidth: "55px" }}>
-              <MicIcon fontSize="medium" />
+            <IconButton sx={{ width: "40px",height:'40px',borderRadius:'50%' }}>
+              <MicIcon fontSize="medium" onClick={startListening} />
             </IconButton>
           </Stack>
           {/* middle content ends */}
@@ -80,8 +135,8 @@ function Navbar() {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={open} onClose={()=> setOpen(false)}>
-        <DrawerYtb open={open} setOpen = {setOpen} />
+      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+        <DrawerYtb open={open} setOpen={setOpen} />
       </Drawer>
     </Box>
   );
