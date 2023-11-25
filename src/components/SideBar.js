@@ -7,7 +7,7 @@ import React from "react";
 
 const SideBar = () => {
   return (
-    <Box m={1} sx={{ width: "60px" }} position="fixed">
+    <Box m={1} sx={{ width: "60px",mt:'80px' }} position="fixed">
       <Stack
         p={2}
         spacing={1}

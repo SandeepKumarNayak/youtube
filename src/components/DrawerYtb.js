@@ -17,7 +17,7 @@ const DrawerYtb = ({ open, setOpen }) => {
     setOpen(false);
   };
   return (
-    <Stack width="250px" direction="column" px={2} py={1}>
+    <Stack width="250px" direction="column" px={2} py={1} >
       <Stack direction="row" p={1}>
         <IconButton
           size="large"
@@ -51,6 +51,7 @@ const DrawerYtb = ({ open, setOpen }) => {
           },
           alignItems: "center",
           borderRadius: "10px",
+          
         }}
         onClick={handleClose}
       >

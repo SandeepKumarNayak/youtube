@@ -15,9 +15,9 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar  />
+      {/* <h2>{process.env.PUBLIC_URL}</h2> */}
       <Routes>
- 
         <Route path="/" element={<Home />} />
         <Route path="/video/:id" element={<VideoDetails />} />
         <Route path="/search/:key" element={<SearchData />} />

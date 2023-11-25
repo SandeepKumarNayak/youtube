@@ -24,7 +24,7 @@ function VideoCard({ video,sideVideo }) {
             component="img"
             image={video?.video?.thumbnails[0]?.url}
             alt="img"
-            sx={{ height: sideVideo ? '100px':'200px',width:sideVideo ? '170px':'auto',borderRadius:'8px',transition:'all 0.2s ease', '&:hover': {
+            sx={{ height: sideVideo ? '100px':'200px',width:sideVideo ? '170px':'auto',transition:'all 0.2s ease', '&:hover': {
               borderRadius:'0px',
            } }}
           />

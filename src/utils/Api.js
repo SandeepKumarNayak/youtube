@@ -4,7 +4,7 @@ const options = {
   
   params: {hl: 'en', gl: 'IN',maxlimit:'100'},
   headers: {
-    'X-RapidAPI-Key': 'a5f911869bmshccf01c25fed8f33p1fd0aajsncefa0f4f4845',
+    'X-RapidAPI-Key': process.env.REACT_APP_KEY,
     'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
   }
 };
